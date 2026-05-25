@@ -6,8 +6,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        System.out.println("=== BEM-VINDO AO GAME SYSTEM ===");
-        System.out.print("Digite seu nome de usuário: ");
+        System.out.println("=== BEM-VINDO ===");
+        System.out.print("Digite seu nome: ");
         String nomeIn = scanner.nextLine();
         
         Jogador jogador = new Jogador(nomeIn);
