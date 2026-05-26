@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class GerenciadorDados {
-    private static final String ARQUIVO_LOG = "logs_inicializacao.txt";
+    private static final String ARQUIVO_LOG = "log_banco.txt";
     private static final String ARQUIVO_SAVE = "save_jogador.txt";
 
     public static void registrarLog(String mensagem) {
@@ -29,17 +29,25 @@ public class GerenciadorDados {
         }
     }
 
+    public static String carregarNome() {
+        try (FileReader fr = new FileReader(ARQUIVO_SAVE);
+             BufferedReader br = new BufferedReader(fr)) {
+            return br.readLine();
+        } catch (IOException e) {
+            return null; 
+        }
+    }
+
     public static int carregarPontos() {
         try (FileReader fr = new FileReader(ARQUIVO_SAVE);
              BufferedReader br = new BufferedReader(fr)) {
-            br.readLine(); // Pula o nome
-            String pontosStr = br.readLine();
+            br.readLine(); 
+            String pontosStr = br.readLine(); 
             if (pontosStr != null) {
                 return Integer.parseInt(pontosStr);
             }
         } catch (IOException | NumberFormatException e) {
-            // Ignora se não existir save
         }
-        return 20; // Pontos iniciais se for a primeira vez
+        return 100; 
     }
 }

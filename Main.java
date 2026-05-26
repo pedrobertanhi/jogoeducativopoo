@@ -6,15 +6,38 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        System.out.println("=== BEM-VINDO ===");
-        System.out.print("Digite seu nome: ");
-        String nomeIn = scanner.nextLine();
-        
-        Jogador jogador = new Jogador(nomeIn);
-        int pontosIniciais = GerenciadorDados.carregarPontos();
-        jogador.adicionarPontos(pontosIniciais);
+        System.out.println("=== BEM-VINDO AO GAME SYSTEM ===");
+        System.out.println("Deseja carregar um jogo salvo anterior?");
+        System.out.println("1) Sim, carregar progresso");
+        System.out.println("2) Não, iniciar um novo jogo");
+        System.out.print("Escolha uma opção: ");
+        int escolhaSave = scanner.nextInt();
+        scanner.nextLine(); 
 
-        // Sistema de Economia - Loja Completa com Itens e Vantagens
+        Jogador jogador;
+
+        if (escolhaSave == 1) {
+            String nomeSalvo = GerenciadorDados.carregarNome();
+            int pontosSalvos = GerenciadorDados.carregarPontos();
+
+            if (nomeSalvo != null) {
+                jogador = new Jogador(nomeSalvo);
+                jogador.adicionarPontos(pontosSalvos);
+                System.out.println("\n>> Save carregado! Bem-vindo de volta, " + nomeSalvo + "!");
+            } else {
+                System.out.println("\n[Aviso] Nenhum arquivo de save foi encontrado. Vamos criar um novo perfil.");
+                System.out.print("Digite seu nome de usuário: ");
+                String nomeIn = scanner.nextLine();
+                jogador = new Jogador(nomeIn);
+                jogador.adicionarPontos(100); 
+            }
+        } else {
+            System.out.print("\nDigite seu nome de usuário para o NOVO jogo: ");
+            String nomeIn = scanner.nextLine();
+            jogador = new Jogador(nomeIn);
+            jogador.adicionarPontos(100); 
+        }
+        
         List<Item> loja = new ArrayList<>();
         loja.add(new ItemCosmetico("Emblema de Ouro POO", 120, "Épico"));
         loja.add(new ItemVantagem("Gabarito Vazado", 80, "QUIZ"));
