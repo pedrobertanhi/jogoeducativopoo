@@ -6,7 +6,6 @@ public class QuizEducativo implements Jogo {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\n--- QUIZ EDUCATIVO DE POO ---");
 
-        // Sistema de Vantagem
         for (Item item : jogador.getInventario()) {
             if (item instanceof ItemVantagem && ((ItemVantagem) item).getJogoAlvo().equals("QUIZ")) {
                 System.out.println("Você tem o item: [" + item.getNome() + "]. Deseja usar para pular a pergunta e ganhar? (1-Sim / 2-Não)");
@@ -15,9 +14,9 @@ public class QuizEducativo implements Jogo {
                     jogador.removerItem(item);
                     jogador.adicionarPontos(50);
                     GerenciadorDados.registrarLog(jogador.getNome() + " usou vantagem no Quiz.");
-                    return; // Encerra o jogo aqui, pois ele já ganhou
+                    return; 
                 }
-                break; // Pergunta só uma vez para evitar bugs
+                break; 
             }
         }
 
